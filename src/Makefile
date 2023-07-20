@@ -1,8 +1,15 @@
 UNAME_S := $(shell uname -s)
 
-CC     = gcc
-CC_OMP = -Xpreprocessor -fopenmp
-CC_PTH = -pthread
+ifeq ($(UNAME_S),Linux)
+    CC     = gcc
+    CC_OMP = -fopenmp
+    CC_PTH = -pthread
+endif
+ifeq ($(UNAME_S),Darwin)    # Darwin is for MacOS
+    CC     = gcc
+    CC_OMP = -Xpreprocessor -fopenmp
+    CC_PTH = -pthread
+endif
 
 CFLAGS = -Wall -pedantic -O2 -std=c11
 
