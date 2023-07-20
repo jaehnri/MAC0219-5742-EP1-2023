@@ -1,17 +1,8 @@
 UNAME_S := $(shell uname -s)
 
-ifeq ($(UNAME_S),Linux)
-    CC     = gcc
-    CC_OMP = -fopenmp
-    CC_PTH = -pthread
-endif
-ifeq ($(UNAME_S),Darwin)    # Darwin is for MacOS
-    CC = /opt/homebrew/opt/llvm/bin/clang
-    CC_OMP = -fopenmp=libomp
-    CC_PTH = -pthread
-    LDFLAGS = -L/opt/homebrew/opt/llvm/lib -Wl,-rpath,/opt/homebrew/opt/llvm/lib
-    CPPFLAGS = -I/opt/homebrew/opt/llvm/include
-endif
+CC     = gcc
+CC_OMP = -Xpreprocessor -fopenmp
+CC_PTH = -pthread
 
 CFLAGS = -Wall -pedantic -O2 -std=c11
 
